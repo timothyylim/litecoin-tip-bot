@@ -4,16 +4,16 @@ A twitter bot for tipping users with litecoin. Inspired by [tippr](https://www.r
 
 ## Todos:
 
-Wallet and transaction logic: 
-- [ ] Create a wallet 
-- [ ] Generate unique receive addresses per user
-- [ ] Figure out how to handle tips (on chain vs off-chain, pros and cons?)
-- [ ] getBalance()
-- [ ] withdraw() 
+Wallet and transaction logic:
+- [ ] User class
+  - [ ] User constructor
+  - [x] Generate a unique litecoin address per user and return it
+  - [ ] getBalance()
+  - [ ] withdraw()
 
 Twitter interface methods:
 - [ ] deposit
-- [ ] balance 
+- [ ] balance
 - [ ] withdraw
 
 ## Resources:

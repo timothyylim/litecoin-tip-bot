@@ -1,0 +1,29 @@
+{
+  "name": "litecoin-tip-bot",
+  "version": "1.0.0",
+  "description": "A twitter bot for tipping users with litecoin. Inspired by [tippr](https://www.reddit.com/r/tippr/wiki/index).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timothyylim/litecoin-tip-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timothyylim/litecoin-tip-bot/issues"
+  },
+  "homepage": "https://github.com/timothyylim/litecoin-tip-bot#readme",
+  "devDependencies": {
+    "tape": "^4.8.0"
+  },
+  "dependencies": {
+    "bigi": "^1.4.2",
+    "bitcoinjs-lib": "^3.3.2",
+    "dotenv": "^5.0.0",
+    "pbkdf2-compat": "^4.0.0"
+  }
+}
