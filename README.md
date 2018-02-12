@@ -2,6 +2,8 @@
 
 A twitter bot for tipping users with litecoin. Inspired by [tippr](https://www.reddit.com/r/tippr/wiki/index).
 
+Starting off with a naïve implementation and working from there.
+
 ## Todos:
 
 Wallet and transaction logic:
@@ -15,6 +17,14 @@ Twitter interface methods:
 - [ ] deposit
 - [ ] balance
 - [ ] withdraw
+
+## Questions
+
+- Make a wallet class? Patch an existing bitcoin js wallet?
+
+## Longer term
+
+- [ ] Generate unique addresses for each transaction
 
 ## Resources:
 - [bitcoin cash recovery tool](https://github.com/timothyylim/bitgo-bcash-recovery-tool/tree/master/src)

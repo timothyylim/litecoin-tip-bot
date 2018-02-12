@@ -4,7 +4,7 @@
   "description": "A twitter bot for tipping users with litecoin. Inspired by [tippr](https://www.reddit.com/r/tippr/wiki/index).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/*"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/timothyylim/litecoin-tip-bot#readme",
   "devDependencies": {
-    "tape": "^4.8.0"
+    "tape": "^4.8.0",
+    "tape-async": "^2.3.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bigi": "^1.4.2",
     "bitcoinjs-lib": "^3.3.2",
     "dotenv": "^5.0.0",
