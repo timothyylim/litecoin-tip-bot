@@ -4,6 +4,21 @@ A twitter bot for tipping users with litecoin. Inspired by [tippr](https://www.r
 
 Starting off with a naïve implementation and working from there.
 
+## Installation
+
+Make sure you have the latest versions of node and npm. 
+
+```
+git clone https://github.com/timothyylim/litecoin-tip-bot.git
+cd litecoin-tip-bot
+npm install
+node index
+```
+
+Run tests
+
+```npm run test```
+
 ## Todos:
 
 Local database
