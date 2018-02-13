@@ -6,6 +6,10 @@ Starting off with a naïve implementation and working from there.
 
 ## Todos:
 
+Local database
+- [ ] Database class
+  - [ ] 
+
 Wallet and transaction logic:
 - [ ] User class
   - [ ] User constructor
