@@ -13,11 +13,20 @@ function Database () {
 
 Database.prototype.getBalance = function (userID, cb) {
   const db = new sqlite3.Database(dbName)
-  db.get(`SELECT balance FROM ${table_name} WHERE user_id=?;`, 'john', (err, row) =>{
+  db.get(`SELECT balance FROM ${table_name} WHERE user_id=?;`, userID, (err, row) =>{
     if (err) {
-      return error
+      cb(error, null)
     }
-    cb(row)
+    cb(null, row)
+  })
+  db.close()
+}
+
+Database.prototype.updateBalance = function (userID, amount, cb) {
+  const db = new sqlite3.Database(dbName)
+  // db.run("UPDATE tbl SET name = ? WHERE id = ?", [ "bar", 2 ]);
+  db.run(`UPDATE ${table_name} SET balance = ? WHERE user_id = ?;`, [amount, userID], (err) => {
+    cb(err)
   })
   db.close()
 }

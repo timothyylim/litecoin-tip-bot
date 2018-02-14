@@ -1,40 +1,45 @@
-const bitcoin = require('bitcoinjs-lib')
-const bigi = require('bigi')
-const secret = process.env.SUPERSECRET
-const axios = require('axios')
-const API_URL = 'https://api.blockcypher.com/v1/ltc/main/addrs/'
+const Database = require('./database')
+const myDB = new Database()
 
 function User (userID) {
-  this.address = generateKeypair(userID, secret).getAddress()
+  this.userID = userID
 }
 
-User.prototype.getAddress = function (userID) {
-  return this.address
-}
+User.prototype.deposit = function () {}
 
 User.prototype.getBalance = function () {
-  const self = this
-
-  return axios.get(API_URL + self.address)
-    .then(function (response) {
-      return response.data.balance
-    })
-    .catch(function (error) {
+  return myDB.getBalance(this.userID, (error, balance) => {
+    if (error) {
       return error
-    })
+    }
+    return balance
+  })
+}
+
+User.prototype.tip = function(recipient, amount) {
+  const senderBalance = this.getBalance()
+  if (senderBalance < amount) {
+    return 'Not enough dough'
+  }
+
+  // Update sender's balance
+  const senderBalance = this.getBalance()
+  myDB.updateBalance(this.userID, amount, (err) => {
+    if (err) {
+      console.log(err)
+    }
+  })
+
+  // Update recipient's balance
+  const Recipient = new User(recipient)
+  const recipientBalance = Recipient.getBalance()
+  myDB.updateBalance(this.userID, recipientBalance+amount, (err) => {
+    if (err) {
+      console.log(err)
+    }
+  })
 }
 
 User.prototype.withdraw = function () {}
-
-const generateKeypair = (userID, secret) => {
-  // TODO: Salt userID with scecret instead of just appending
-  const hash = bitcoin.crypto.sha256(Buffer.from(userID + secret))
-  const d = bigi.fromBuffer(hash)
-
-  return new bitcoin.ECPair(d, null, {
-    compressed: false,
-    network: bitcoin.networks.litecoin
-  })
-}
 
 module.exports = User
