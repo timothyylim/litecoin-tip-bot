@@ -1,21 +1,20 @@
 const test = require('tape-async');
-// Load temp super secret beofre User module
-process.env.SUPERSECRET = 's'
-const User = require('../user')
+// Change the db before the user is loaded
+process.env.DATABASE = './database/test_database'
 
-test('Can return a deposit address', function (t) {
-  t.plan(1)
-  const tim = new User('timothyylim')
-  t.equal(tim.getAddress(), 'LRXfVeLiBk16v18z1m9fvrhSMxua7eNnMq')
+const User = require('../user')
+const Database = require('../database')
+const myDB = new Database()
+
+test('Can initialize itself to the database', function (t) {
+    t.plan(2);
+    const tim = new User('tim')
+    myDB.getUser('tim', (err, rows) => {
+      t.equal(rows.user_id, 'tim');
+      t.equal(rows.balance, 0);
+    })
 });
 
-test('Can return balance of an address', async (t) => {
-  t.plan(1)
-  const tim = new User('timothyylim')
-  const balance = await tim.getBalance()
-  t.equal(balance, 0);
-})
+test('Can get its own balance', function (t) {})
 
-test('Can handle errors successfully when getting balance', async (t) => {
-  
-})
+test('Can tip another user', function (t) {})

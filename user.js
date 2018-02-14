@@ -3,6 +3,7 @@ const myDB = new Database()
 
 function User (userID) {
   this.userID = userID
+  myDB.insertUser(userID, 0)
 }
 
 User.prototype.deposit = function () {}
@@ -23,8 +24,7 @@ User.prototype.tip = function(recipient, amount) {
   }
 
   // Update sender's balance
-  const senderBalance = this.getBalance()
-  myDB.updateBalance(this.userID, amount, (err) => {
+  myDB.updateBalance(this.userID, senderBalance-amount, (err) => {
     if (err) {
       console.log(err)
     }

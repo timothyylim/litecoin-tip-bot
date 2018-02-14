@@ -1,7 +1,7 @@
 // const User = require('./user')
 // const tim = new User('timothyylim')
 // console.log(tim.getAddress())
-
+require('dotenv').config()
 const Database = require('./database')
 const myDB = new Database()
 // myDB.getBalance('john', (error, balance) => {
@@ -9,8 +9,8 @@ const myDB = new Database()
 // })
 
 // Dummy tip
-myDB.updateBalance('john', 5, (err) => {
-  if (err) {
-    console.log(err)
-  }
-})
+// myDB.updateBalance('john', 5, (err) => {
+//   if (err) {
+//     console.log(err)
+//   }
+// })
