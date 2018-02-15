@@ -1,45 +1,72 @@
 const Database = require('./database')
 const myDB = new Database()
 
-function User (userID) {
+function User (userID, cb) {
   this.userID = userID
-  myDB.insertUser(userID, 0)
+  myDB.insertUser(userID, 0, (err) => {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    cb(null, this)
+  })
 }
 
-User.prototype.deposit = function () {}
+User.prototype.deposit = function (amount, cb) {
+  this.getBalance((err, currentBalance) => {
+    myDB.updateBalance(this.userID, (currentBalance+amount), (err) => {
+      if (err) {
+        cb(err)
+      } else {
+        cb(null)
+      }
+    })
+  })
+}
 
-User.prototype.getBalance = function () {
-  return myDB.getBalance(this.userID, (error, balance) => {
+User.prototype.withdraw = function (cb) {
+  const self = this
+  myDB.updateBalance(this.userID, 0, (err) => {
+    if (err) {
+      cb(err, null)
+    } else {
+      self.getBalance((err, balance) => {
+        cb(null, balance)
+      })
+    }
+  })
+}
+
+User.prototype.getBalance = function (cb) {
+  myDB.getBalance(this.userID, (error, balance) => {
     if (error) {
-      return error
+      return cb(err, null)
     }
-    return balance
+    return cb(null, balance)
   })
 }
 
-User.prototype.tip = function(recipient, amount) {
-  const senderBalance = this.getBalance()
-  if (senderBalance < amount) {
-    return 'Not enough dough'
-  }
-
-  // Update sender's balance
-  myDB.updateBalance(this.userID, senderBalance-amount, (err) => {
-    if (err) {
-      console.log(err)
+User.prototype.tip = function(recipient, amount, cb) {
+  const self = this
+  this.getBalance((err, balance) => {
+    if (amount > balance) {
+      cb('Not enough dough')
     }
-  })
+    else {
 
-  // Update recipient's balance
-  const Recipient = new User(recipient)
-  const recipientBalance = Recipient.getBalance()
-  myDB.updateBalance(this.userID, recipientBalance+amount, (err) => {
-    if (err) {
-      console.log(err)
+      // Update sender's balance
+      myDB.updateBalance(self.userID, (balance-amount), (err) => {
+
+        // Update the recipient's balance
+        new User(recipient, (err, user) => {
+          user.deposit(amount, (err) => {
+            cb(null)
+          })
+        })
+      })
     }
   })
 }
 
-User.prototype.withdraw = function () {}
 
 module.exports = User
