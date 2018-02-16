@@ -40,5 +40,6 @@ Database.prototype.updateBalance = function (userID, amount, cb) {
     cb(err)
   })
 }
+// http://yizhang82.me/async-sqlite-as-promise
 
 module.exports = Database

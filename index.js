@@ -1,9 +1,9 @@
 // const User = require('./user')
 // const tim = new User('timothyylim')
 // console.log(tim.getAddress())
-require('dotenv').config()
-const Database = require('./database')
-const myDB = new Database()
+// require('dotenv').config()
+// const Database = require('./database')
+// const myDB = new Database()
 // myDB.getBalance('john', (error, balance) => {
   // console.log(balance);
 // })
