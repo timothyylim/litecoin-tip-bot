@@ -6,7 +6,7 @@ Starting off with a naïve implementation and working from there.
 
 ## Installation
 
-Make sure you have the latest versions of node and npm. 
+Make sure you have the latest versions of node and npm.
 
 ```
 git clone https://github.com/timothyylim/litecoin-tip-bot.git
@@ -21,29 +21,16 @@ Run tests
 
 ## Todos:
 
-Local database
-- [ ] Database class
-  - [ ] 
-
-Wallet and transaction logic:
-- [ ] User class
-  - [ ] User constructor
-  - [x] Generate a unique litecoin address per user and return it
-  - [ ] getBalance()
-  - [ ] withdraw()
-
-Twitter interface methods:
-- [ ] deposit
-- [ ] balance
-- [ ] withdraw
+Firstly we need to create a functional twitter bot that can:
+- [ ] Be notified when it is mentioned i.e. @litecoin-tippr
+  - [ ] Only when that mention is a reply to a tweet
+- [ ] Respond to a mention
+- [ ] Be notified when sent a direct message
+- [ ] Respond to a direct message
 
 ## Questions
 
-- Make a wallet class? Patch an existing bitcoin js wallet?
-
 ## Longer term
-
-- [ ] Generate unique addresses for each transaction
 
 ## Resources:
 - [bitcoin cash recovery tool](https://github.com/timothyylim/bitgo-bcash-recovery-tool/tree/master/src)
