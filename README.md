@@ -28,9 +28,15 @@ Firstly we need to create a functional twitter bot that can:
 - [ ] Be notified when sent a direct message
 - [ ] Respond to a direct message
 
+Later we'll hook up the User class and the DB and test accordingly.
+
 ## Questions
 
 ## Longer term
+
+- [ ] Devops stuff to make sure the service is robust
+- [ ] Decide on whether to make this a litecoin tipbot or a lightning network tipbot
+- [ ] Replace callbacks in DB with [async/await](http://yizhang82.me/async-sqlite-as-promise)
 
 ## Resources:
 - [bitcoin cash recovery tool](https://github.com/timothyylim/bitgo-bcash-recovery-tool/tree/master/src)
