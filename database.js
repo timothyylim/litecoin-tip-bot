@@ -1,15 +1,16 @@
+require('dotenv').config()
 const sqlite3 = require('sqlite3').verbose()
 const userTable = process.env.USER_TABLE
 const db = new sqlite3.Database(process.env.DATABASE)
 
 function Database () {
   db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS ${userTable} (user_id TEXT, balance INT)`)
+    db.run(`CREATE TABLE IF NOT EXISTS ${userTable} (user_id TEXT NOT NULL, balance INT NOT NULL)`)
   })
 }
 
 Database.prototype.getUser = function (userID, cb) {
-  db.get(`SELECT * FROM ${userTable} WHERE user_id = ?`, userID, (err, rows) => {
+  db.get(`SELECT rowid, user_id, balance FROM ${userTable} WHERE user_id = ?`, userID, (err, rows) => {
     cb(err, rows)
   })
 }

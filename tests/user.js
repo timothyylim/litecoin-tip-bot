@@ -31,6 +31,13 @@ test('Can get its own balance', function (t) {
   })
 })
 
+test('Can return a receive address', function (t) {
+  t.plan(1)
+  new User('tim', (err, user) => {
+    t.equals(user.address, 'mzi2EupcmbAM33BFXwjqZXELwzcgZCqnKa')
+  })
+})
+
 test('Can receive deposits', function (t) {
   t.plan(1);
   new User('tim', (err, user) => {

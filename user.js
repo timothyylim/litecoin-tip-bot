@@ -1,14 +1,21 @@
+const Wallet = require('./wallet')
+const myWallet = new Wallet()
 const Database = require('./database')
 const myDB = new Database()
 
 function User (userID, cb) {
-  this.userID = userID
+  var self = this
+  self.userID = userID
   myDB.insertUser(userID, 0, (err) => {
     if (err) {
       cb(err, null)
       return
     }
-    cb(null, this)
+
+    myDB.getUser(self.userID, (err, rows) => {
+      self.address = myWallet.generateReceiveAddress(rows.rowid)
+      cb(null, self)
+    })
   })
 }
 
@@ -38,11 +45,16 @@ User.prototype.withdraw = function (cb) {
 }
 
 User.prototype.getBalance = function (cb) {
-  myDB.getBalance(this.userID, (error, balance) => {
+  const self = this;
+  myDB.getBalance(self.userID, (error, internalBalance) => {
     if (error) {
-      return cb(err, null)
+      cb(err, null)
     }
-    return cb(null, balance)
+
+    myWallet.getBalanceOfReceiveAddress(self.address)
+      .then(addressBalance => {
+        cb(null, internalBalance + addressBalance)
+      })
   })
 }
 
@@ -67,6 +79,5 @@ User.prototype.tip = function(recipient, amount, cb) {
     }
   })
 }
-
 
 module.exports = User

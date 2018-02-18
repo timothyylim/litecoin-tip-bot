@@ -30,6 +30,10 @@ Firstly we need to create a functional twitter bot that can:
 
 Later we'll hook up the User class and the DB and test accordingly.
 
+Wallet element:
+- [ ] Make a PR for litecoin testnet for bitcoinjs-lib
+- [ ] Is there a testnet faucet?
+
 ## Questions
 
 ## Longer term
@@ -39,6 +43,8 @@ Later we'll hook up the User class and the DB and test accordingly.
 - [ ] Replace callbacks in DB with [async/await](http://yizhang82.me/async-sqlite-as-promise)
 
 ## Resources:
+- [blockcypher api documentation](https://www.blockcypher.com/dev/bitcoin/#address-balance-endpoint)
+- [freenode](https://kiwiirc.com/client/chat.freenode.net:6697/#litecoin-dev)
 - [bitcoin cash recovery tool](https://github.com/timothyylim/bitgo-bcash-recovery-tool/tree/master/src)
 - [bitcoinjs-lib](https://github.com/bitcoinjs/bitcoinjs-lib)
 - [blocktrail slack tip bot](https://github.com/blocktrail/slack-tipbot/blob/master/lib/user.js)
